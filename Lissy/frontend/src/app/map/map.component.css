@@ -1,0 +1,235 @@
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+::ng-deep .leaflet-control-attribution {
+    background: var(--background) !important;
+    color: var(--p-gray-50);
+}
+
+::ng-deep .color-base {
+    filter: invert(94%) sepia(68%) saturate(530%) hue-rotate(222deg) brightness(119%) contrast(97%);
+}
+
+::ng-deep .color-base-shadow {
+    filter: opacity(80%) blur(0.3rem) invert(94%) sepia(68%) saturate(530%) hue-rotate(222deg) brightness(119%) contrast(97%);
+}
+
+::ng-deep .color-background {
+    filter: invert(5%) sepia(2%) saturate(2566%) hue-rotate(202deg) brightness(94%) contrast(97%);
+}
+
+::ng-deep .color-a {
+    filter: invert(44%) sepia(73%) saturate(4625%) hue-rotate(340deg) brightness(98%) contrast(107%);
+}
+
+::ng-deep .color-b {
+    filter: invert(43%) sepia(17%) saturate(3295%) hue-rotate(186deg) brightness(107%) contrast(93%);
+}
+
+::ng-deep .color-c {
+    filter: invert(62%) sepia(77%) saturate(486%) hue-rotate(87deg) brightness(87%) contrast(88%);
+}
+
+::ng-deep .color-d {
+    filter: invert(70%) sepia(50%) saturate(1969%) hue-rotate(5deg) brightness(101%) contrast(94%);
+}
+
+.legend-base-div {
+    position: absolute;
+    bottom: 1em;
+    left: 6em;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+
+.zoom-div {
+    bottom: auto;
+    row-gap: 0;
+}
+
+::ng-deep .legend-layer-div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    width: 23vw;
+}
+
+::ng-deep .legend-item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25em;
+}
+
+::ng-deep .legend-img {
+    max-width: 1.25em;
+}
+
+::ng-deep .legend-text {
+    display: block ruby;
+    align-content: center;
+    font-weight: bold;
+}
+
+::ng-deep .delay-categories-main-div {
+    row-gap: 0.5em;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+::ng-deep .delay-categories-graph-main {
+    display: flex;
+}
+
+::ng-deep .delay-categories-graph-outer {
+    width: 100%;
+    height: 1.25em;
+    display: flex;
+    position: absolute;
+    align-content: center;
+}
+
+::ng-deep .delay-categories-graph-frame {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    height: 1em;
+}
+
+::ng-deep .delay-categories-graph-color {
+    height: 50%;
+    margin: auto;
+    width: auto;
+    flex-grow: 1;
+    width: 100%;
+}
+
+::ng-deep .delay-categories-graph-legend-outer {
+    min-width: 10em;
+    height: 1.25em;
+    display: flex;
+    z-index: 1000;
+}
+
+::ng-deep .delay-categories-graph-legend-point {
+    width: 1.25em;
+    background-color: transparent;
+    border-radius: 1.25em;
+}
+
+::ng-deep .delay-categories-graph-legend-fill { 
+    background-color: none;
+}
+
+::ng-deep .delay-categories-graph-legend-text { 
+    display: grid;
+    font-size: 0.85em;
+}
+
+::ng-deep .delay-categories-graph-legend-inner-text { 
+    text-align: center;
+}
+
+::ng-deep .delay-categories-graph-legend-inner-text:first-child { 
+    text-align: start;
+}
+
+::ng-deep .delay-categories-graph-legend-inner-text:last-child { 
+    text-align: end;
+}
+
+::ng-deep .stop-img {
+    height: 6em;
+    margin: auto;
+}
+
+::ng-deep .stop-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+::ng-deep .stop-name {
+    font-size: larger;
+    font-weight: bold;
+}
+
+::ng-deep .delay-categories-stop-dot {
+    width: 1.5em;
+    display: flex;
+    height: 1.5em;
+    border-radius: 1.5em;
+}
+
+::ng-deep .delay-categories-stop-legend-row {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.25em;
+}
+
+::ng-deep .delay-categories-stop-text {
+    display: flex;
+    margin: auto auto auto 0;
+}
+
+::ng-deep .delay-categories-stop-legend-main {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5em;
+}
+
+::ng-deep .delay-categories-stop-legend-inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25em;
+    margin: auto;
+}
+
+@media only screen and (max-width: 1500px) {
+    .legend-base-div {
+        width: 40vw;
+    }
+
+    ::ng-deep .legend-layer-div {
+        width: 40vw;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .legend-base-div {
+        width: 60vw;
+    }
+
+    ::ng-deep .legend-layer-div {
+        width: 60vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #map {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .zoom-div {
+        display: none;
+    }
+
+    .legend-base-div {
+        left: 1em;
+        bottom: 4em;
+        width: calc(100vw - 2em);
+    }
+
+    ::ng-deep .legend-layer-div {
+        width: calc(100vw - 2em);
+    }
+
+    ::ng-deep .leaflet-bottom {
+        bottom: 4em;
+    }
+}

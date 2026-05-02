@@ -1,0 +1,210 @@
+<main class="main" *ngIf="config.enabled">
+    <!-- Tabs menu -->
+    <span class="tabs-menu">
+        <button type="button" (click)="context = 0" [ngClass]="context == 0 ? 'tabs-btn-active' : 'tabs-btn'">{{ 'about.header.manual' | translate }}</button>
+        <button type="button" (click)="context = 1" [ngClass]="context == 1 ? 'tabs-btn-active' : 'tabs-btn'">{{ 'about.header.architecture' | translate }}</button>
+        <button type="button" (click)="context = 2" [ngClass]="context == 2 ? 'tabs-btn-active' : 'tabs-btn'">{{ 'about.header.development' | translate }}</button>
+        <button type="button" (click)="context = 3" [ngClass]="context == 3 ? 'tabs-btn-active' : 'tabs-btn'">{{ 'about.header.next' | translate }}</button>
+    </span>
+    <!-- Mobile menu -->
+    <div class="mobile-header">
+        <div class="mobile-header-item">
+            <button type="button" class="mobile-btn-header" routerLink="/">
+                <i class="pi pi-home"></i>
+                <p class="mobile-btn-text">{{ 'common.mainMenu' | translate }}</p>
+            </button>
+        </div>
+        <div class="mobile-header-item">
+            <button type="button" class="mobile-btn-header" (click)="switchMobileSubMenuVisibility()">
+                <i class="pi pi-cog"></i>
+                <p class="mobile-btn-text">{{ 'common.settingsMenu' | translate }}</p>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-submenu" *ngIf="moduleFocus === -1">
+        <span class="mobile-head">
+            <h3>{{ 'common.settingsMenu' | translate }}</h3>
+            <button type="button" (click)="switchMobileSubMenuVisibility()">
+            <i class="pi pi-times"></i>
+            </button>
+        </span>
+        <div class="mobile-header-item">
+            <button type="button" class="mobile-menu-btn" (click)="translate.use('en')" *ngIf="translate.currentLang === 'cz'">
+                <img class="mobile-menu-img" [src]="'http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg'"/>
+                <p class="mobile-menu-text">{{ 'common.english' | translate }}</p>
+            </button>
+            <button type="button" class="mobile-menu-btn" (click)="translate.use('cz')" *ngIf="translate.currentLang === 'en'">
+                <img class="mobile-menu-img" [src]="'http://purecatamphetamine.github.io/country-flag-icons/3x2/CZ.svg'"/>
+                <p class="mobile-menu-text">{{ 'common.czech' | translate }}</p>
+            </button>
+        </div>
+    </div>
+    <!-- Tabs -->
+     <span [ngSwitch]="context">
+        <!-- User manual -->
+        <span *ngSwitchDefault>
+            <h2>{{ 'about.manual.header' | translate }}</h2>
+            <p>{{ 'about.manual.info' | translate }}</p>
+            <p-stepper [value]="1" class="basis-[50rem]">
+                <p-step-list>
+                    <p-step [value]="1">{{ 'about.manual.steps.0_header' | translate }}</p-step>
+                    <p-step [value]="2">{{ 'about.manual.steps.1_header' | translate }}</p-step>
+                    <p-step [value]="3">{{ 'about.manual.steps.2_header' | translate }}</p-step>
+                    <p-step [value]="4">{{ 'about.manual.steps.3_header' | translate }}</p-step>
+                </p-step-list>
+                <p-step-panels>
+                    <p-step-panel [value]="1">
+                        <ng-template #content>
+                            <p>{{ 'about.manual.steps.0_info' | translate }}</p>
+                            <span class="stepper-img">
+                                <p-image [src]="translate.currentLang === 'cz' ? './manual/manual_0_cz.png' : './manual/manual_0_en.png'" alt="Image" width="500" [preview]="true" />
+                            </span>
+                        </ng-template>
+                    </p-step-panel>
+                    <p-step-panel [value]="2">
+                        <ng-template #content>
+                            <p>{{ 'about.manual.steps.1_info' | translate }}</p>
+                            <span class="stepper-img">
+                                <p-image [src]="translate.currentLang === 'cz' ? './manual/manual_1_cz.png' : './manual/manual_1_en.png'" alt="Image" width="500" [preview]="true" />
+                            </span>
+                        </ng-template>
+                    </p-step-panel>
+                    <p-step-panel [value]="3">
+                        <ng-template #content>
+                            <p>{{ 'about.manual.steps.2_info' | translate }}</p>
+                            <span class="stepper-img">
+                                <p-image [src]="translate.currentLang === 'cz' ? './manual/manual_2_cz.png' : './manual/manual_2_en.png'" alt="Image" width="500" [preview]="true" />
+                            </span>
+                        </ng-template>
+                    </p-step-panel>
+                    <p-step-panel [value]="4">
+                        <ng-template #content>
+                            <p>{{ 'about.manual.steps.3_info' | translate }}</p>
+                            <span class="stepper-img">
+                                <p-image [src]="translate.currentLang === 'cz' ? './manual/manual_3_cz.png' : './manual/manual_3_en.png'" alt="Image" width="500" [preview]="true" />
+                            </span>
+                        </ng-template>
+                    </p-step-panel>
+                </p-step-panels>
+            </p-stepper>
+        </span>
+        <!-- Architecture -->
+        <span *ngSwitchCase="1">
+            <h2>{{ 'about.architecture.header' | translate }}</h2>
+            <p>{{ 'about.architecture.header_info' | translate }}</p>
+            <h3>{{ 'about.architecture.server.header' | translate }}</h3>
+            <p>{{ 'about.architecture.server.header_info' | translate }}</p>
+            <h4>{{ 'about.architecture.server.system_header' | translate }}</h4>
+            <p>{{ 'about.architecture.server.system_info' | translate }}</p>
+            <span class="stepper-img">
+                <p-image src="./about/gtfs.svg" alt="Image" width="500" [preview]="true" />
+            </span>
+            <h4>{{ 'about.architecture.server.routes_header' | translate }}</h4>
+            <p>{{ 'about.architecture.server.routes_info' | translate }}</p>
+            <h4>{{ 'about.architecture.server.processing_header' | translate }}</h4>
+            <p>{{ 'about.architecture.server.processing_info' | translate }}</p>
+            <span class="stepper-img">
+                <p-image src="./about/processing.svg" alt="Image" width="800" [preview]="true" />
+            </span>
+            <h3>{{ 'about.architecture.client.header' | translate }}</h3>
+            <p>{{ 'about.architecture.client.header_info' | translate }}</p>
+            <h4>{{ 'about.architecture.client.client.shapes_header' | translate }}</h4>
+            <p>{{ 'about.architecture.client.client.shapes_info' | translate }}</p>
+            <span class="stepper-img">
+                <p-image src="./about/shape.png" alt="Image" width="500" [preview]="true" />
+            </span>
+            <h4>{{ 'about.architecture.client.client.delay_trips_header' | translate }}</h4>
+            <p>{{ 'about.architecture.client.client.delay_trips_info' | translate }}</p>
+            <span class="stepper-img">
+                <p-image src="./about/trip_delay.png" alt="Image" width="300" [preview]="true" />
+            </span>
+        </span>
+        <!-- Development history -->
+        <span *ngSwitchCase="2">
+            <h2>{{ 'about.development.header' | translate }}</h2>
+            <p>{{ 'about.development.info' | translate }}</p>
+            <h3>2025</h3>
+            <ul>
+                <li>{{ 'about.development.2025.0' | translate }}</li>
+                <li>{{ 'about.development.2025.1' | translate }}</li>
+            </ul>
+            <span class="stepper-img">
+                <p-image src="./development/2025_0.png" alt="Image" width="300" [preview]="true" />
+            </span>
+            <h3>2024</h3>
+            <ul>
+                <li>{{ 'about.development.2024.0' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://www.vut.cz/studenti/zav-prace/detail/154340')">{{ 'common.bp' | translate }}</button>
+            <ul>
+                <li>{{ 'about.development.2024.1' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://dexter.fit.vutbr.cz/lineShaper')">LineShaper</button>
+            <ul>
+                <li>{{ 'about.development.2024.2' | translate }}</li>
+                <li>{{ 'about.development.2024.3' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://www.fit.vut.cz/research/publication/c193353')">{{ 'common.article' | translate }}</button>
+            <h3>2023</h3>
+            <ul>
+                <li>{{ 'about.development.2023.0' | translate }}</li>
+            </ul>
+            <span class="stepper-img">
+                <p-image src="./development/2023_0.png" alt="Image" width="500" [preview]="true" />
+            </span>
+            <ul>
+                <li>{{ 'about.development.2023.1' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://excel.fit.vutbr.cz/submissions/2023/013/13_poster.pdf')">{{ 'common.poster' | translate }}</button>
+            <button type="button" (click)="goToLink('https://youtu.be/SoA0mQxcK-k')">Video</button>
+            <ul>
+                <li>{{ 'about.development.2023.2' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://www.vut.cz/studenti/zav-prace/detail/146479')">{{ 'common.dp' | translate }}</button>
+            <ul>
+                <li>{{ 'about.development.2023.3' | translate }}</li>
+                <li>{{ 'about.development.2023.4' | translate }}</li>
+            </ul>
+            <span class="stepper-img">
+                <p-image src="./development/2023_1.png" alt="Image" width="300" [preview]="true" />
+            </span>
+            <ul>
+                <li>{{ 'about.development.2023.5' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://www.fit.vut.cz/research/publication/c188364')">{{ 'common.article' | translate }}</button>
+            <h3>2022</h3>
+            <ul>
+                <li>{{ 'about.development.2022.0' | translate }}</li>
+            </ul>
+            <button type="button" (click)="goToLink('https://data.brno.cz/datasets/e8aa121910df41bb9a28e4ca34a263c7_0')">Dataset</button>
+            <ul>
+                <li>{{ 'about.development.2022.1' | translate }}</li>
+            </ul>
+            <span class="stepper-img">
+                <p-image src="./development/2022_0.png" alt="Image" width="500" [preview]="true" />
+            </span>
+            <ul>
+                <li>{{ 'about.development.2022.2' | translate }}</li>
+                <li>{{ 'about.development.2022.3' | translate }}</li>
+            </ul>
+            <span class="stepper-img">
+                <p-image src="./development/2022_1.svg" alt="Image" width="500" [preview]="true" />
+            </span>
+        </span>
+        <!-- What next -->
+        <span *ngSwitchCase="3">
+            <h2>Dexter&#64;FIT</h2>
+            <p>{{ 'about.next.dexter' | translate }}</p>
+            <button type="button" (click)="goToLink('https://dexter.fit.vutbr.cz')">Dexter&#64;FIT</button>
+            <h2>Trasy liniek</h2>
+            <p>{{ 'about.next.lineShaper' | translate }}</p>
+            <button type="button" (click)="goToLink('https://dexter.fit.vutbr.cz/lineShaper')">LineShaper</button>
+            <h2>Data Brno</h2>
+            <p>{{ 'about.next.brno' | translate }}</p>
+            <button type="button" (click)="goToLink('https://data.brno.cz')">Data Brno</button>
+            <h2>Kontakt</h2>
+            <p>{{ 'about.next.contact' | translate }}</p>
+            <button type="button" (click)="goToLink('https://www.fit.vut.cz/person/ilazur')">Juraj Lazúr</button>
+        </span>
+     </span>
+</main>

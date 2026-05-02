@@ -1,0 +1,229 @@
+{
+    "about": {
+        "name": "O aplikaci",
+        "header": {
+            "manual": "Jak na to?",
+            "architecture": "Z čeho se to skládá?",
+            "development": "Jak to vzniklo?",
+            "next": "Co dalšího tam máte?"
+        },
+        "manual": {
+            "header": "Uživatelský manuál",
+            "info": "Protože každý dashboard funguje trochu jinak, níže najdete jednoduchý návod, jak tuto aplikaci používat. Jednotlivé moduly jsou navrženy velmi podobně a sdílejí podobnou logiku ovládání, přestože každý modul pracuje s jiným pohledem na data. Tento návod by vám tedy měl usnadnit získání užitečných znalostí z této aplikace a také vám ukázat všechny funkce, aby vám neunikl žádný detail.",
+            "steps": {
+                "0_header": "Hlavní menu",
+                "0_info": "Po zapnutí aplikace se vždy zobrazí hlavní nabídka, kde můžete vybrat modul, se kterým chcete pracovat. Výběr jazyka najdete vpravo nahoře.",
+                "1_header": "Výběr data",
+                "1_info": "Hlavním kritériem při vizualizaci jakýchkoli dat v aplikaci je výběr data nebo dat, která vás zajímají. Pomocí ovládacího panelu vlevo můžete vybrat jeden nebo více dnů v závislosti na povaze modulu. Samotný výběr pak musíte potvrdit tlačítkem Načíst data. Tímto způsobem můžete například získat všechny trasy vybrané linky v určitý den.",
+                "2_header": "Výběr linky",
+                "2_info": "Po výběru časového období, které vás zajímá, vám aplikace na základě dostupných dat umožní vybrat linku, trasu a případně i konkrétní spoj, o které máte zájem. Pomocí ovládacího panelu vlevo můžete například zjistit, že vaše oblíbená linka rozhodně nejezdí pouze mezi dvěma konečnými zastávkami.",
+                "3_header": "Detaily a nastavení",
+                "3_info": "Samotná vizualizace vybraných dat nikdy nemůže pokrýt všechny požadavky. Proto lze každý modul konfigurovat pomocí ovládacího panelu vlevo dole. A protože některá data mají smysl pouze tehdy, když je umístíte do prostoru mapy, můžete získat další podrobnosti kliknutím přímo na objekty v mapě. Můžete tak například zjistit, které zastávky jsou v systému označeny jako bezbariérové."
+            }
+        },
+        "architecture": {
+            "header": "Architektura aplikace",
+            "header_info": "Návrh architektury je založen na vzoru MVC, takže jej lze rozdělit na databázovou, serverovou a uživatelskou část. Každou z těchto částí pak lze rozdělit na další funkční celky.",
+            "server": {
+                "header": "Server",
+                "header_info": "Serverová část aplikace se stará o komunikaci s databázemi, udržuje aktuální obraz dopravního systému a zpracovává data z reálného provozu. Systém pracuje celkem se 3 databázemi. První databáze obsahuje údaje popisující dopravní systém, druhá databáze obsahuje údaje z reálného provozu a třetí databáze slouží ke zvýšení výkonu klientské aplikace. Základem celé aplikace je udržování aktuálního obrazu dopravního systému.",
+                "system_header": "Dopravní systém a jeho aktualizace",
+                "system_info": "Ať už se jedná o analýzu dopravního systému nebo hledání vhodného spojení, znalost struktury, obrazu dopravního systému je nezbytná. Zjednodušeně řečeno, struktura dopravního systému obsahuje informace o tom, kdy přesně spoj z vybrané zastávky odjíždí. Samotný systém si udržuje interní reprezentaci dopravního systému složenou z linek, tras a spojů, která je každý den aktualizována. Jako vstup pro aktualizaci systému se používá veřejně dostupný soubor dat ve formátu GTFS. Struktura a indexace objektů v něm jsou navrženy tak, aby zachovávaly vnitřní vztahy systému a jejich změny v čase. Vztahy mezi objekty jsou nepostradatelné, pokud chceme systém dlouhodobě analyzovat. Existují různé způsoby, jak tyto vztahy v rámci dopravních systémů modelovat. Tato aplikace využívá trasy linek.",
+                "routes_header": "Trasování linek",
+                "routes_info": "Trasa linky má několik významů. Jedním ze způsobů, jak lze trasu definovat, je pevně stanovená posloupnost zastávek. V případě větších dopravních systémů obsahuje jedna linka obvykle několik tras, kde kromě běžné trasy existují i různé zkrácené varianty. Pokud definici trasy rozšíříme o ulice, kterými musí vozidlo obsluhující linku projet, získáme fyzickou trasu linky. Právě fyzická infrastruktura vykazuje v průběhu času nejmenší změny. Proto se jeví jako nejlepší řešení modelovat vztahy v dopravním systému pouze pomocí fyzické infrastruktury. Dostupné soubory dat popisující dopravní systémy však ne vždy obsahují fyzické trasy linek. Proto tato aplikace obsahuje také modul pro trasování po dopravních sítích, který počítá a udržuje skutečné fyzické trasy linek.",
+                "processing_header": "Zpracování provozních dat",
+                "processing_info": "Jednou z hypotéz disertační práce, v jejímž rámci je tato aplikace vyvíjena, je, že veškeré provozní údaje se mění pouze v bodech, které jsou pro systém důležité. Například počet cestujících se obecně mění pouze na zastávce, takže potřebujeme pouze jednu hodnotu pro každou dvojici zastávek. V případě zpoždění lze tuto logiku aplikovat na křižovatky. V rámci aplikace je tento přístup implementován pomocí algoritmu zpracování dat. Vstupem jsou záznamy z vozidel MHD, které jsou přiřazeny ke každému úseku fyzické trasy příslušné linky. Tímto způsobem dochází k redukci dat při zachování vnitřních vztahů. Tento algoritmus je znázorněn na obrázku níže."
+            },
+            "client": {
+                "header": "Uživatelská aplikace",
+                "header_info": "Zatímco serverová část aplikace se stará o udržování struktury dopravního systému a zpracování dat, klientská aplikace vizualizuje uložená data. V závislosti na zamýšleném využití obsahuje aplikace několik modulů, které poskytují různé pohledy na uložená data.",
+                "client": {
+                    "shapes_header": "Trasy linek",
+                    "shapes_info": "Jak bylo popsáno výše, pro funkčnost této aplikace jsou zásadní fyzické trasy linek. Modul linkových tras jednoduše zpřístupňuje všechny trasy v rámci dopravního systému. Výběrem konkrétního data můžete zjistit, že vaše oblíbená linka rozhodně nejezdí jen mezi dvěma koncovými zastávkami, ale některé trasy obsluhují velmi zajímavé zastávky.",
+                    "delay_trips_header": "Zpoždění spojů",
+                    "delay_trips_info": "Pokud vás naopak zajímá, zda vaše pravidelný spoj jezdí každý den se zpožděním, odpověď vám poskytne modul Zpoždění spojů. Výběrem konkrétního data, linky a času odjezdu z výchozí zastávky můžete zjistit, kde a o kolik se vybraný spoj zpozdil. Pokud vyberete více dnů, můžete například porovnat zpoždění jednoho spoje v různých dnech týdne. Kromě toho můžete po kliknutí na konkrétní zastávku zjistit například to, kolik procent spojů přijelo do této zastávky s nulovým zpožděním."
+                }
+            }
+        },
+        "development": {
+            "header": "Vývoj aplikace",
+            "info": "Na počátku vývoje této aplikace byla zpřístupněna databáze se záznamy zpoždění vozidel MHD na portálu Data Brno. Tím byl zahájen vývoj systému, který by tato data komprimoval, ukládal, analyzoval a dále využíval. Z původní diplomové práce se vyvinutá aplikace stala základem pro disertační práci, jejímž cílem je propojení individuální, veřejné a sdílené dopravy při plánování každodenních cest. Aplikace, se kterou pracujete, je druhou verzí původního nástroje a neustále se vyvíjí. Níže naleznete chronologický přehled vývoje celé aplikace a dalších výstupů souvisejících s touto aplikací.",
+            "2025": {
+                "0": "Na začátku roku vstupuje do testování základní část druhé verze aplikace.",
+                "1": "Spuštění testovacího provozu kompletní druhé verze nástroje, se kterým právě pracujete."
+            },
+            "2024": {
+                "0": "Data z aplikace jsou použita v bakalářské práci Krištofa Paulíka, který se zabýval zlepšením vyhledávání spojení pomocí predikce zpoždění.",
+                "1": "V rámci spolupráce se společností KORDIS JMK vzniká v další aplikaci nový přepracovaný modul routingu, který vychází z první verze aplikace. Můžete si jej vyzkoušet v aplikaci LineShaper.",
+                "2": "Nasazení aplikace přineslo nové požadavky a odhalilo chyby v původním návrhu, začíná práce na druhé verzi nástroje.",
+                "3": "Výsledky testování výpočetní složitosti první verze aplikace jsou zveřejněny v článku prezentovaném na konferenci na Slovensku."
+            },
+            "2023": {
+                "0": "Dokončení první verze aplikace.",
+                "1": "Prezentace navrženého transformačního algoritmu a celé aplikace na studentské konferenci Excel@FIT.",
+                "2": "Úspěšná obhajoba diplomové práce, v jejímž rámci byla vytvořena první verze této aplikace.",
+                "3": "Testovací nasazení aplikace a její publikace na Data Brno.",
+                "4": "Zkušební provoz přinesl potřebu přepracovat vnitřní model struktury dopravního systému.",
+                "5": "Výsledky byly zveřejněny v článku prezentovaném na konferenci v Polsku."
+            },
+            "2022": {
+                "0": "Zveřejnění databáze se záznamy zpoždění vozidel IDS JMK na webu Data Brno. První návrh transformačního algoritmu pro kompresi uložených dat.",
+                "1": "První zkušební pokusy zpracování dat, první návrhy vizualizačního dashboardu.",
+                "2": "Dokončením požadavků získaných od Data Brno se řešení problému stává zadáním diplomové práce.",
+                "3": "Řešení nedostupnosti fyzických tras linek pomocí implementace trasovacího modulu. Dokončení návrhu první verze aplikace."
+            }
+        },
+        "next": {
+            "dexter": "Na úrovni univerzitního výzkumu není vždy možné získat hmatatelny obraz řešení různých problémů z oblasti informačních technologií. Některé výstupy však lze publikovat ve formě, která je přístupná široké veřejnosti. To je i případ tohoto nástroje, který byl nejprve vyvinut jako součást magisterské a později doktorské práce. V rámci naší výzkumné skupiny se však zabýváme i dalšími oblastmi souvisejícími s informačními systémy, různými daty a chytrými městy. Pokud vás toto téma zajímá, určitě klikněte sem:",
+            "lineShaper": "Další nástroj, který si můžete vyzkoušet, byl vyvinut pro řešení specifického problému trasování ve spolupráci se společností KORDIS JMK. Tento nástroj slouží k vygenerování fyzických tras tratí Jihomoravského kraje, podobných těm, které používá tento nástroj. Najdete jej zde:",
+            "brno": "Důležitou součástí našeho výzkumu je využívání otevřených zdrojů dat ve standardizovaných formátech, aby výsledky našeho výzkumu mohly být použity i v jiných městech. Proto tato aplikace využívá datové sady ze statutárního města Brna. Pokud se chcete podívat, jaká data používá například magistrát, určitě klikněte sem:",
+            "contact": "Aplikace se neustále vyvíjí a uložené údaje využívají například studenti ve svých diplomových pracích. Postupně se snažíme odstraňovat chyby a aplikaci dále rozvíjet. Pokud jste přesto našli nějaké chyby, měli jiné zvídavé dotazy nebo nápady, jak aplikaci vylepšit, určitě mě kontaktujte:"
+        }
+    },
+    "stats": {
+        "name": "Statistiky",
+        "today": "Dnes",
+        "loadData": "Načíst Data",
+        "info": "Různé metriky jsou důležitými ukazateli při posuzování funkčnosti navrhovaného algoritmu nebo řešení. V případě této aplikace se sledované parametry týkají dvou oblastí. První je samotná struktura dopravního systému, která se skládá ze zastávek, linek, tras a spojů. Druhou oblastí je samotné zpracování dopravních dat, přičemž nejvíce sledovanými parametry je podíl správně přiřazených a uložených záznamů.",
+        "systemStateHead": "Statistiky dopravní sítě",
+        "systemStateInfo": "Základem pro zpracování dat o fungování samotného dopravního systému je znalost jeho struktury. Zjednodušeně řečeno, kdy a kde by mělo jet nějaké vozidlo. V podstatě se každý systém hromadné dopravy skládá ze stejné vnitřní struktury. Na samém vrcholu jsou linky, například 1. Každá linka pak obsahuje trasy, což je v podstatě pevné pořadí zastávek. Každá trasa obsahuje spoje, které jsou v podstatě realizací trasy v určitém čase, jinými slovy, je to ta konkrétní šalina, která jede z dané zastávky v určitém čase. Spoje jsou pak propojeny s trasami v prostoru, což je v podstatě jen seznam ulic, kudy trasa linky vede. V případě této aplikace jsou trasy a spoje propojeny, což vychází z navrženého datového modelu, který je podrobněji popsán v části O aplikaci. Následující statistiky ukazují stav systému ve vybraném období.",
+        "systemStateActual": "Aktuálně používané",
+        "systemStateNew": "Nově přidané",
+        "systemStateRoutes": "Linky",
+        "systemStateShapes": "Trasy v prostoru",
+        "systemStateStops": "Zastávky",
+        "systemStateTrips": "Spoje",
+        "systemStateProcessingTime": "Jak dlouho trvala aktualizace systému?",
+        "systemStateProcessingTimeInfo": "Celá aktualizace struktury dopravního systému spočívá především v tom, že se zkoumá, co se oproti současnému stavu změnilo. Zpravidla více času zaberou změny, při kterých se mění trasy linek v prostoru, což vyžaduje výpočet nových tras v dopravních sítích.",
+        "systemStateRouting": "Trasování linek",
+        "systemStateRoutingInfo": "Aby bylo možné použít algoritmus zpracování dat, který je podrobně popsán v části O aplikaci, je nutné znát přesnou trasu linky v prostoru dopravní sítě. Zjednodušeně řečeno, kterými křižovatkami a ulicemi má vozidlo projet. Tyto trasy se vypočítávají na základě podkladových dopravních sítí a aktuálního stavu systému hromadné dopravy. Protože se trasy mění méně často než ostatní atributy systému, neprobíhá aktualizace této části systému každý den, takže statistiky z výpočtu tras v reálném prostoru jsou k dispozici pouze pro některé dny.",
+        "systemStateRoutingRail": "Železnice",
+        "systemStateRoutingRoad": "Autobusy a trolejbusy",
+        "systemStateRoutingTram": "Tramvaje",
+        "systemStateRoutingType": "Typ trasy",
+        "systemStateRoutingSuccess": "Míra úspěšnosti trasování",
+        "systemStateRoutingSuccessOk": "Úspěch",
+        "systemStateRoutingSuccessNotOk": "Chyba",
+        "systemStateRoutingTime": "Jak dlouho trval výpočet tras?",
+        "processingDataHead": "Statistiky zpracování provozních dat",
+        "processingDataInfo": "Aktuální model dopravního systému je šablonou, z níž se přidáním dat ze skutečného provozu vytvoří obraz reálného chování systému v daný den. Vstup tvoří záznamy z externí databáze, přičemž každý záznam představuje stav vozidla v určitém časovém okamžiku. Vlastní zpracování těchto záznamů tedy spočívá v jejich stažení a následném indexování tak, aby byly co nejvíce komprimovány, aniž by došlo ke ztrátě důležitých metadat, která určují kam tyto záznamy v systému patří. Současně se při indexování redukují záznamy o různé anomálie, jako je pobyt vozidla na konečné zastávce apod. Indexované záznamy jsou pak uloženy a využívány dalšími moduly této aplikace. Dalším důležitým ukazatelem je, kolik naplánovaných spojů v systému obsahuje data, tj. existuje nějaký záznam o průběhu spoje. Jednoduše řečeno, pro daný spoj existuje alespoň jeden záznam odeslaný vozidlem, které spoj realizovalo. Kromě toho existují také záznamy, které popisují neplánované spoje v systému. Míra spojů popsaných těmito záznamy pak ukazuje, jak velká je část systému, pro kterou existují data o skutečném chování.",
+        "processingDataTimes": "Jak dlouho trvá zpracování záznamů?",
+        "processingDataTimeAll": "Celkový čas",
+        "processingDataTimeDownload": "Stahování záznamů",
+        "processingDataTimeProcessing": "Indexace záznamů",
+        "processingDataDownloadRecords": "Stažené záznamy",
+        "processingDataSavedRecords": "Uložené záznamy",
+        "processingDataRecordsStats": "Míra redukce záznamů",
+        "processingDataDroppedRecords": "Odstraněné záznamy",
+        "processingDataPlannedTrips": "Plánované spoje",
+        "processingDataExtraTrips": "Mimořádné spoje",
+        "processingDataTripsRate": "Úspěšnost indexace spojů",
+        "processingDataTripsRateSuccess": "Spoje obsahující data",
+        "processingDataTripsRateFail": "Spoje bez dat"
+    },
+    "shapes" : {
+        "name": "Trasy linek",
+        "today": "Dnes",
+        "loadData": "Načíst Data",
+        "route": "Linka",
+        "shape": "Trasa",
+        "close": "Zavřít",
+        "enableZones": "Zobrazit tarifní zóny",
+        "enableRouteColor": "Použít barvu linky ze vstupních dat GTFS"
+    },
+    "delay" : {
+        "trips": "Zpoždění spojů",
+        "aggMethod": "Agregační metoda",
+        "avg": "Průměr",
+        "sum": "Součet",
+        "max": "Maximum",
+        "min": "Minimum",
+        "route": "Linka",
+        "shape": "Trasa",
+        "trip": "Spoj",
+        "aggMethodInfo": "Matematická funkce, která se používá při kombinování dat z více dnů.",
+        "showDelayLabels": "Zobrazit hodnoty zpoždění",
+        "showDelayLabelsInfo": "Zobrazení konkrétních hodnot zpoždění pro jednotlivé segmenty trasy podle vybrané metody agregace.",
+        "simplifiedVisualisation": "Zjednodušená analýza zpoždění",
+        "simplifiedVisualisationInfo": "Na mapě nejsou zobrazeny všechny dostupné údaje o zpoždění. Aplikace pracuje pouze s datami z příjezdu vozidla na zastávku.",
+        "allTrips": "Všechny spoje na trase",
+        "delayCategories": "Kategorie zpoždění",
+        "delayCategoriesInfo": "Pro lepší přehlednost vizualizace jsou konkrétní hodnoty zpoždění na trase seskupeny do kategorií, které lze různě konfigurovat.",
+        "delayFrom": "Zpoždění od",
+        "delayTo": "Zpoždění do",
+        "addDelayCategory": "Nová kategorie",
+        "resetCategories": "Resetovat kategorie",
+        "other": "Ostatní",
+        "graphs": "Vývoj zpoždění v průběhu jízdy spoje",
+        "graphAggMethodInfo": "Zatímco mapové zobrazení ukazuje vývoj zpoždění v prostoru a čase, účelem jednoduchého čárového grafu je zobrazit vývoj hodnot zpoždění mezi zastávkami. Pokud je však vybráno více dnů nebo více spojů, je nezbytné dostupná data pro lepší přehlednost redukovat. Data můžete seskupit podle dnů, kdy se všechna dostupná data pro vybrané spoje spojí pomocí zvolené agregační funkce do jednoho spoje. Nebo můžete data seskupit podle spojů, kdy se data z různých dnů pro stejný spoj sloučí pomocí agregační funkce.",
+        "graphAggDate": "Spojit podle datumu",
+        "graphAggTrip": "Spojit podle spojů"
+    },
+    "map" : {
+        "zone": "Zóna",
+        "wheelchair": "Zastávka má zvýšenou nástupní hranu",
+        "order": "Pořadí zastávky",
+        "delayStats": "Statistika příchodů spojů",
+        "delayStatsNoData": "Nejsou k dispozici žádná data",
+        "avg": "Průměrné zpoždění",
+        "sum": "Součet zpoždění",
+        "max": "Maximální zpoždění",
+        "min": "Minimální zpoždění"
+    },
+    "primeng": {
+        "dayNames": ["Neděle", "Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota"],
+        "dayNamesShort": ["Ned", "Pon", "Út", "Stř", "Čtv", "Pát", "Sob"],
+        "dayNamesMin": ["Ned","Pon","Út","Stř","Čtv","Pát","Sob"],
+        "monthNames": ["Leden","Únor","Březen","Duben","Květen","Červen","Červenec","Srpen","Září","Říjen","Listopad","Prosinec"],
+        "monthNamesShort": ["Leden","Únor","Březen","Duben","Květen","Červen","Červenec","Srpen","Září","Říjen","Listopad","Prosinec"],
+        "today": "Dnes",
+        "weekHeader": "Týd"
+    },
+    "common": {
+        "calendar": "Výběr časového období",
+        "dayOfWeek": "Výběr dne v týdnu",
+        "route": "Výběr zobrazené trasy",
+        "trip": "Výběr spoje",
+        "settings": "Nastavení vizualizace",
+        "bp": "Bakalářská práce",
+        "dp": "Diplomová práce",
+        "article": "Článek",
+        "poster": "Plakát",
+        "mainMenu": "Hlavní menu",
+        "settingsMenu": "Nastavení",
+        "visualizationMenu": "Vizualizace",
+        "czech": "Česky",
+        "english": "English",
+        "404Header": "Chyba 404!",
+        "404Text": "Do této oblasti nevede žádná linka. Zkuste to prosím znovu.",
+        "noRoute": "K dispozici nejsou žádné linky",
+        "noRouteGroup": "K dispozici nejsou žádné trasy",
+        "noTrip": "K dispozici nejsou žádné spoje"
+    },
+    "UIMessagesService": {
+        "loading": "Načítání dat",
+        "toasts": {
+            "dbConnectError": {
+                "head": "Chyba na straně serveru",
+                "body": "Nelze se připojit k serveru. Kontaktujte prosím správce systému."
+            },
+            "noAvailableDates" : {
+                "head": "Nelze načíst žádná data",
+                "body": "V databázi nejsou k dispozici žádná data."
+            },
+            "noAvailableDataForSelection" : {
+                "head": "Nejsou k dispozici žádná data",
+                "body": "Pro vybraný časový interval nejsou k dispozici žádná data. Zkuste prosím změnit časový interval."
+            },
+            "noAvailablePrediction": {
+                "head": "Predikce se nepovedla",
+                "body": "Pro daný spoj není k dispozici dostatek dat pro spolehlivou predikci."
+            }
+        }
+    },
+    "prediction": {
+        "name": "Predikce zpoždění",
+        "mapLabel": "Predikované zpoždění",
+        "showValues": "Zobrazit hodnoty predikovaného zpoždění"
+    }
+}

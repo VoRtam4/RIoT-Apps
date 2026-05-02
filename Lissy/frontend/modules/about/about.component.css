@@ -1,0 +1,72 @@
+.main {
+    width: 60vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.context-menu {
+    display: flex;
+    margin: 2rem 0;
+    justify-content: space-around;
+}
+
+.context-btn {
+    font-size: 1.75rem;
+}
+
+.about-tab-component {
+    margin-top: 2em;
+}
+
+.about-tab-header {
+    margin-bottom: 2em;
+}
+
+.tabs-menu {
+    display: grid;
+    justify-content: space-around;
+    margin: 2em 0;
+    grid-template-columns: auto auto auto auto;
+}
+
+.tabs-btn {
+    border-bottom: 0.15em solid transparent;
+    border-radius: 0;
+}
+
+.tabs-btn-active {
+    border-bottom: 0.15em solid var(--p-gray-50);
+    border-radius: 0;
+    opacity: 1.0;
+}
+
+.stepper-img {
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 1500px) {
+    .main {
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .main {
+        width: 90vw;
+    }
+
+    .tabs-menu {
+        grid-template-columns: auto auto;
+        row-gap: 2em;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .tabs-menu {
+        grid-template-columns: auto;
+        row-gap: 1em;
+        margin: 0.5em auto;
+    }
+}
