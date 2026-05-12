@@ -1,0 +1,614 @@
+$backgroundColor: #fdfcfc;
+$cardColor: white;
+$contentTextColor: black;
+$filterTextColor: white;
+$linkColorActive: #d4041c;
+$fontFamily: 'Roboto', 'sans-serif';
+$cardBodyColor: #d9d9d9;
+$buttonHoverBackgroundColor: #6f040f;
+$selectOptionBackgroundColor: #cc5160;
+$selectOptionTickColor: #4f0109;
+// $selectOptionBackgroundColor: #783d43c1;
+
+header {
+  background-color: $cardColor;
+  text-align: center;
+  // border-bottom: solid rgba(5, 5, 5, 0.07);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  color: $contentTextColor;
+  height: 50px;
+  padding-inline: 50;
+  padding-left: 24px;
+  padding-right: 24px;
+  line-height: 64px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10000; // navbar stays on top
+  font-family: $fontFamily;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidermenu {
+  background-color: $cardColor;
+  text-align: center;
+  padding-top: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  color: $contentTextColor;
+  min-width: 60px;
+}
+
+.ant-spin {
+  color: $linkColorActive;
+  .ant-spin-dot-item {
+    background-color: $linkColorActive !important;
+  }
+}
+
+.ant-tour {
+  max-width: 100vw;
+}
+
+.ant-modal-root {
+  .ant-modal-mask {
+    z-index: 10000;
+  }
+  .ant-modal-wrap {
+    z-index: 10001;
+  }
+}
+
+.iconStyle {
+  padding-top: 10px;
+  font-size: 25 !important;
+}
+
+nav {
+  a {
+    margin: 0 1rem;
+    color: $contentTextColor;
+    text-decoration: none;
+  }
+}
+.ant-float-btn {
+  width: 60px;
+  height: 60px !important;
+}
+
+.ant-float-btn-default {
+  background-color: $linkColorActive;
+  .ant-float-btn-body {
+    background-color: $linkColorActive;
+    .ant-float-btn-content {
+      width: 80px;
+      padding-right: 17px;
+      .ant-float-btn-icon {
+        color: white;
+        font-size: 32px;
+      }
+    }
+  }
+}
+a {
+  color: $linkColorActive;
+}
+.active {
+  color: $linkColorActive !important;
+}
+
+.text-left {
+  text-align: left;
+  margin-left: 15px;
+  font-weight: bold;
+  color: black;
+}
+
+.sidebar {
+  text-align: center;
+  line-height: 30px;
+  color: $filterTextColor;
+  background-color: $linkColorActive;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+  top: 50px;
+  left: 0;
+
+  Button {
+    color: $linkColorActive;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  Button:hover {
+    background-color: $buttonHoverBackgroundColor;
+    color: $filterTextColor !important;
+    border: $buttonHoverBackgroundColor;
+  }
+}
+
+.content {
+  text-align: center;
+  // min-height: 120;
+  // height: 100%;
+  // padding: 24px;
+  // line-height: 120px;
+  color: $contentTextColor;
+  background-color: $backgroundColor;
+  padding-top: 50px;
+  overflow: hidden;
+}
+
+.title {
+  color: $linkColorActive;
+  font-size: 23px;
+  font-weight: 900;
+  text-wrap: balance;
+}
+
+.header-nav {
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.navLink {
+  color: black;
+  .active {
+    color: $linkColorActive;
+  }
+}
+
+.navLink:hover {
+  color: $buttonHoverBackgroundColor !important;
+}
+
+.live-map-top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardbody {
+  max-width: 250px;
+  max-height: 100px;
+  // height: 100%;
+  // margin-top: 10px;
+  // background-color: white;
+  padding: 0;
+  color: black;
+
+  // &:not(.live-map-top-row) {
+  //   height: unset;
+  // }
+}
+
+.filterStyle {
+  min-width: 180px;
+  max-width: 220px;
+  margin-top: 5px;
+
+  &.streets {
+    max-width: unset;
+    width: 90%;
+  }
+}
+
+// .ant-select-item .ant-select-item-option .ant-select-item-option-selected {
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: $selectOptionBackgroundColor;
+  color: white;
+}
+
+.ant-select-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled)
+  .ant-select-item-option-state {
+  color: $selectOptionTickColor;
+}
+.modalStyle {
+  min-width: 300px;
+}
+
+.modalStylePass {
+  min-width: 280px;
+  margin-top: 5px;
+}
+
+.iconCancel {
+  margin-left: 5px;
+  font-size: 12px;
+  color: grey;
+}
+.iconCancel:hover {
+  color: black;
+}
+
+.modalButtonOk {
+  background-color: $linkColorActive;
+  font-weight: bold;
+  color: #d9d9d9 !important;
+}
+.modalButtonOk:hover {
+  background-color: $buttonHoverBackgroundColor !important;
+  color: $filterTextColor !important;
+  border: $buttonHoverBackgroundColor;
+}
+
+.ant-picker-dropdown {
+  z-index: 10000;
+}
+
+.ant-select-dropdown {
+  z-index: 10000;
+}
+
+.ant-drawer {
+  .ant-drawer-header {
+    background-color: $backgroundColor;
+    border-bottom: none;
+    padding-left: 16px;
+    padding-bottom: 8px;
+  }
+  .ant-drawer-body {
+    background-color: $backgroundColor;
+  }
+  .ant-drawer-title {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+}
+.modalButtonDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.modalButton {
+  background-color: $linkColorActive;
+  font-weight: bold;
+}
+
+.modal .modalButton:hover {
+  background-color: $buttonHoverBackgroundColor !important;
+  color: white !important;
+}
+
+.ant-tour-prev-btn:hover {
+  border-color: $buttonHoverBackgroundColor !important;
+  color: $buttonHoverBackgroundColor !important;
+}
+
+.ant-btn:hover {
+  border-color: $buttonHoverBackgroundColor !important;
+}
+
+.ant-tour-indicator-active {
+  background-color: $linkColorActive !important;
+}
+.modalButton:hover {
+  background-color: $buttonHoverBackgroundColor !important;
+  font-weight: bold !important;
+}
+
+.divButtonsOnMap {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  gap: 5px 7px;
+  top: 10px;
+  left: 50px;
+  flex-wrap: wrap;
+  margin-right: 20px;
+  padding-right: 20px;
+
+  .ant-btn-primary {
+    background-color: white !important;
+    color: $linkColorActive !important;
+    border: 1px solid $linkColorActive;
+  }
+  .ant-btn-primary:hover {
+    background-color: $linkColorActive !important;
+    color: white !important;
+  }
+}
+
+.ant-checkbox-checked {
+  .ant-checkbox-inner {
+    background-color: $linkColorActive;
+    border-color: $linkColorActive;
+  }
+  .ant-checkbox-inner:hover {
+    background-color: $linkColorActive;
+    border-color: $linkColorActive;
+  }
+  .ant-checkbox-inner:active {
+    background-color: $linkColorActive;
+    border-color: $linkColorActive;
+  }
+}
+
+.ant-checkbox {
+  .ant-checkbox-input {
+    background-color: $linkColorActive !important;
+    border-color: $linkColorActive !important;
+  }
+  .ant-checkbox-input::after {
+    background-color: $linkColorActive !important;
+    border-color: $linkColorActive !important;
+  }
+}
+
+.tooltip {
+  top: 10.8px !important;
+}
+
+// .ant-slider-mark-text {
+//   width: 100%;
+// }
+
+.ant-slider {
+  .ant-slider-track {
+    background-color: $linkColorActive !important;
+  }
+  .ant-slider-handle::after {
+    box-shadow: 0 0 0 2px $linkColorActive !important;
+  }
+}
+
+.divTimelineOnMap {
+  position: absolute;
+  z-index: 1000;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: $backgroundColor;
+}
+.ant-slider-mark-text {
+  width: auto;
+}
+.buttonRoute {
+  display: flex;
+  align-items: center;
+}
+
+.buttonRoute:hover {
+  border-color: $buttonHoverBackgroundColor !important;
+  color: $buttonHoverBackgroundColor !important;
+  background-color: white;
+}
+
+.buttonsModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rightButtons {
+  display: flex;
+}
+
+.modalButtonOpen {
+  display: flex;
+  justify-content: flex-end;
+  Button {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 60px;
+    color: #d9d9d9;
+    letter-spacing: 2px;
+    font-weight: bold;
+    background-color: $linkColorActive;
+    font-weight: bold;
+  }
+  Button:hover {
+    background-color: $buttonHoverBackgroundColor !important;
+    color: $filterTextColor !important;
+    border: $buttonHoverBackgroundColor;
+  }
+}
+
+.plot-live-page {
+  width: 100%;
+}
+
+.sidebar-drawer {
+  z-index: 100000;
+}
+
+.stats-drawer .ant-drawer-body .cardbody > div {
+  &:first-of-type {
+    // border: 1px solid red !important;
+    line-height: 20px;
+  }
+
+  &:last-of-type {
+    // border: 1px solid green !important;
+    line-height: 7px;
+  }
+}
+.h3 {
+  text-align: start;
+  padding-left: 25px;
+}
+.ant-btn-default:disabled {
+  opacity: 0.75;
+  color: rgba(0, 0, 0, 0.88);
+  background: #ffffff;
+}
+
+.stats-drawer .ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pie-chart {
+  width: 350px;
+}
+.ant-drawer-header-title {
+  flex-direction: row-reverse;
+}
+
+.ant-drawer-body {
+  text-align: center;
+  line-height: 30px;
+  color: black;
+  background-color: $linkColorActive;
+  height: 100%;
+  // position: fixed;
+  overflow-x: hidden;
+  top: 50px;
+  left: 0;
+  padding: 0px !important;
+
+  Button {
+    color: $linkColorActive;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  Button:hover {
+    background-color: $buttonHoverBackgroundColor;
+    color: $filterTextColor !important;
+    border: $buttonHoverBackgroundColor;
+  }
+}
+.ant-select-selector {
+  max-height: 280px;
+  min-width: 50px;
+  overflow: auto;
+  background-color: white !important;
+  color: black !important;
+}
+
+.ant-select-selector:hover {
+  border-color: $buttonHoverBackgroundColor !important;
+}
+
+.ant-select-selector:active {
+  border-color: $buttonHoverBackgroundColor !important;
+}
+
+.marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #c30b82;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+}
+
+// to align icon
+.custom-div-icon i {
+  position: absolute;
+  width: 22px;
+  font-size: 22px;
+  left: 0;
+  right: 0;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.graphs-row {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+  .ant-col {
+    max-width: unset;
+  }
+}
+.dashboard-row {
+  padding-top: 8px;
+}
+
+.dashboard-top-row-stats {
+  .ant-spin-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px 0;
+    padding-top: 10px;
+  }
+}
+
+.language-select {
+  .ant-select-selector {
+    overflow: hidden;
+
+    &::after {
+      margin: 9px;
+    }
+  }
+
+  .ant-select-selection-item {
+    padding: 0 !important;
+    height: 32px;
+  }
+}
+
+.language-switcher {
+  .ant-select-item-option {
+    padding: 0 !important;
+  }
+
+  .ant-select-item-option-selected {
+    background-color: #dcdcdc !important;
+  }
+
+  .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // & > img {
+    //   width: 32px;
+    // }
+  }
+}
+
+.date-slider .ant-slider-mark > span {
+  &:last-of-type {
+    transform: translateX(-90%) !important;
+  }
+
+  &:first-of-type {
+    transform: translateX(-10%) !important;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .top-row .ant-card-body,
+  .live-map-top-row .ant-card-body {
+    padding: 8px !important;
+
+    .ant-card-meta {
+      flex-direction: column;
+    }
+
+    .ant-card-meta-avatar {
+      padding-inline-end: 0;
+    }
+
+    .ant-card-meta-title {
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .top-row .cardbody {
+    // height: 100%;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+  }
+}

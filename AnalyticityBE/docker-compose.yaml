@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - 8002:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      RIOT_API_KEY: "i0NHUsNEqNkL5VBTyJBGlFHXPgtMA12z"
+      RIOT_WS_URL: "ws://host.docker.internal:9090/ws"
+      RIOT_WS_ORIGIN: "http://localhost:8080"
+      RIOT_WAZE_JAM_MEDIUM_LENGTH_M: "250"
+      RIOT_WAZE_JAM_HIGH_LENGTH_M: "1000"
