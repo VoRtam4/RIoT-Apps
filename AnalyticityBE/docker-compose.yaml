@@ -8,7 +8,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      RIOT_API_KEY: "i0NHUsNEqNkL5VBTyJBGlFHXPgtMA12z"
+      RIOT_API_KEY: "Zt1dTUTThM3b99awW7IF5byAhiBIlAFk"
       RIOT_WS_URL: "ws://host.docker.internal:9090/ws"
       RIOT_WS_ORIGIN: "http://localhost:8080"
       RIOT_WAZE_JAM_MEDIUM_LENGTH_M: "250"

@@ -1,34 +1,32 @@
-# WAZE DATA ANALYSIS (front end application)
+# Analyticity Frontend
 
-This project was created as Master's thesis at the Faculty of Information Technology, 
-Brno university of Technology. 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The main purpose of this project was to analyze and visualize traffic 
-data collected from users using navigation application Waze. 
-This application was created in cooperation with [data.brno.cz](https://data.brno.cz/)
+Analyticity Frontend je klientská část aplikace Analyticity, funkcionalitami ponechaná pouze v rozsahu potřebném pro integrační testování platformy RIoT. Původní aplikace Analyticity slouží k analýze a vizualizaci dopravních dat města Brna nad daty Waze. Autorkou původní aplikace je **Magdaléna Ondrušková** a původní repozitář je dostupný jako [waze-data-analysis](https://github.com/MagdalenaOndruskova/waze-data-analysis).
 
+Frontend samotný nebyl pro integraci RIoT zásadně upravován. Dále zobrazuje mapu, dashboard, výběr ulic, tras a časového období stejným způsobem jako původní aplikace. Komunikuje s backendem upraveným pro využití RIoT jako zdroje historických Waze dat a KPI výsledků.
 
-In this repository you can find a code for running frontend application. This application is querying data from backend application and visualizing the data for user. 
-It visualize data on map (using leaflet library) and in dashboard. User can select different streets and routes for which the visualization is done, while choosing 
-a time interval (up to one year in the past). 
+## Spuštění
 
+Samostatné spuštění frontendové aplikace:
 
-Datasets can be found at: [Traffic delays](https://data.brno.cz/datasets/mestobrno::plynulost-dopravy-traffic-delays/about) and [Traffic events](https://data.brno.cz/datasets/mestobrno::ud%C3%A1losti-na-cest%C3%A1ch-traffic-events/about). 
+```bash
+npm install
+npm run dev -- --host 0.0.0.0 --port 5173
+```
 
-Repository for frontend application can be found here [waze-data-analysis](https://github.com/MagdalenaOndruskova/waze-data-analysis).
+Frontend očekává backend Analyticity na adrese:
 
-Final application is available at: 
-- localhost under address `localhost/waze-data-analysis/`
-- testing deployment at [data.brno](https://data.brno.cz/apps/70b6c168c69e4955a354622b3e92dd49/explore)
+```text
+http://localhost:8002
+```
 
-__________________________________
-### Usage
-In terminal, use command:
-- Nainstalovanie potrebnych kniznic: `pnpm i`
-- Spustenie aplikacie `pnpm preview`
+Výchozí cesta aplikace ve Vite konfiguraci je:
 
-___________________________________
-### License 
-This project is licensed under MIT License.
-____________________________________
+```text
+http://localhost:5173/waze-data-analysis/
+```
 
+## Licence
+
+Původní aplikace Analyticity je licencovaná pod MIT licencí. Licence je uvedena v souboru [LICENSE](LICENSE).
